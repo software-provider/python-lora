@@ -1,8 +1,7 @@
 from __future__ import print_function
 
-from xml.etree import ElementTree
-
 from .crypto import loramac_decrypt
+import defusedxml.ElementTree
 
 WKT_POINT_FMT = "SRID=4326;POINT({lng} {lat})"
 
@@ -13,7 +12,7 @@ class LoRaPayload(object):
     XMLNS = "{http://uri.actility.com/lora}"
 
     def __init__(self, xmlstr):
-        self.payload = ElementTree.fromstring(xmlstr)
+        self.payload = defusedxml.ElementTree.fromstring(xmlstr)
 
         if self.payload.tag != self.XMLNS + "DevEUI_uplink":
             raise ValueError(
