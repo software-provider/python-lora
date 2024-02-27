@@ -1,9 +1,9 @@
-import random
 import sys
 from binascii import unhexlify
 
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+import secrets
 
 UP_LINK = 0
 DOWN_LINK = 1
@@ -107,4 +107,4 @@ def loramac_decrypt(payload_hex, sequence_counter, key, dev_addr, direction=UP_L
 
 def generate_appskey():
     """Generate a random secret key"""
-    return "".join("{:02X}".format(x) for x in random.sample(range(255), 16))
+    return "".join("{:02X}".format(x) for x in secrets.SystemRandom().sample(range(255), 16))
